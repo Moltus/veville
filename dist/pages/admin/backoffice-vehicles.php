@@ -2,8 +2,9 @@
 require_once("../../inc/init.php");
 require_once("../../inc/header.php");
 
+
 if(!isConnectedAsAdmin()) {
-  header("Location:" . URL . "connexion.php");
+  header("Location: pages/connexion.php");
 }
 
 // to remove vehicles
