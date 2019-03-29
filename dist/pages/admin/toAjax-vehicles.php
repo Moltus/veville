@@ -23,7 +23,7 @@ foreach ($result as $key => $value) {
   foreach ($value as $subkey => $subvalue) {
     // $content .= '<pre>'; print_r($value); $content .= '</pre>';
     if ($subkey == 'photo')
-      $content .= "<td><img src='../../photos/vehicles/$subvalue' width='200'></td>";
+      $content .= "<td><img src='../../photos/vehicles/$subvalue' width='150'></td>";
     else if ($subkey == 'daily_cost')
       $content .= "<td>$subvalue €</td>";
     else

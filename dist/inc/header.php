@@ -13,7 +13,7 @@
   </head>
   <body>
      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="<?=ROOT?>/index.php">Véville</a>
+      <a class="navbar-brand" href="<?=ROOT?>index.php">Véville</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -21,27 +21,27 @@
       <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<?=ROOT?>index.php">Home<span class="sr-only">(current)</span></a>
           </li>
 
           <?php if(isConnected()): ?>
           <li class="nav-item">
-            <a class="nav-link" href="pages/login.php?action=logout">Deconnexion</a>
+            <a class="nav-link" href="<?=PAGES?>login.php?action=logout">Deconnexion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/profile.php">Profil</a>
+            <a class="nav-link" href="<?=PAGES?>profile.php">Profil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/orders.php">Commandes</a>
+            <a class="nav-link" href="<?=PAGES?>orders.php">Commandes</a>
           </li>
 
           <?php else: ?>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/signup.php">Inscription</a>
+            <a class="nav-link" href="<?=PAGES?>signup.php">Inscription</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/login.php?action=logout">Connexion</a>
+            <a class="nav-link" href="<?=PAGES?>login.php?action=login">Connexion</a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="/pages//panier.php">Panier</a>
@@ -52,9 +52,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Back Office</a>
             <div class="dropdown-menu" aria-labelledby="dropdown04">
-              <a class="dropdown-item" href="pages/admin/backoffice-vehicles.php">Gestion vehicules</a>
-              <a class="dropdown-item" href="pages/admin/backoffice-agency.php">Gestion agences</a>
-              <a class="dropdown-item" href="pages/admin/backoffice-users
+              <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-vehicles.php">Gestion vehicules</a>
+              <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-agency.php">Gestion agences</a>
+              <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-users
               .php">Gestion utilisateurs</a>
             </div>
           </li>

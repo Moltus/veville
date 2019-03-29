@@ -6,20 +6,23 @@ $conn = new PDO('mysql:host=localhost;dbname=veville', 'root', '', array(PDO::AT
 session_start();
 
 // ----- PATH
-define("ROOT", $_SERVER['DOCUMENT_ROOT']. "/Veville/dist/");
+define("LOCALROOT", $_SERVER['DOCUMENT_ROOT']. "/veville/dist/");
 // echo ROOT;
 
 // cette constante retourne le chemin physique du dossier véville sur le serveur lors le l'enregistrement d'images/photos, nous aurons besoin du chemin complet du dossier photo pour enregistrer la photo.
 
+define("ROOT", "/veville/dist/");
 
-define("INC", "inc/");
+define("INC", "/veville/dist/inc/");
 
-define("PAGES", "pages/");
+define("PAGES", "/veville/dist/pages/");
 // cette constante servira à enregistrer l'URL d'une photo/image dans la BDD, on ne conserve jamais la photo elle même, ce serait trop lourd pour le serveur.
 
-define("ADMIN", "pages/admin/");
+define("SCRIPTS", "/veville/dist/scripts/");
 
-define("IMAGES", "images/");
+define("ADMIN", "/veville/dist/pages/admin/");
+
+define("IMAGES", "/veville/dist/images/");
 
 // ------- VARIABLES
 $content = '';

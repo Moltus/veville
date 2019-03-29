@@ -68,69 +68,71 @@ if ($_POST){
 
 <h1 class="m-4 text-center">Ajout de véhicules</h1>
 
-<div class="container">
-  <?php echo $content ?>
-  <?php echo $error ?>
-  <form action="" method="POST" class="mt-4 col-md-4 offset-4">
-    <div class="form-group">
-      <label for="id_agency">Nom de l'agence</label>
-      <select name="id_agency" id="id_agency">
-      <?php
-        
-        $stmt = $conn->query("SELECT * FROM agencies");
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $option = '';
-        foreach ($result as $key => $value) {
-          // print_r($value);
-          $option = "<option value=" . $value['id_agency'] . ">" . $value['title'] . "</option>";
-          echo $option;
-        }
-        ?>
-      </select>
-    </div>
-    <!-- vehicles table content into HTML table -->
-    <div id="table-container"></div>
-      <?php
+<?php echo $content ?>
+<?php echo $error ?>
+<form action="" method="POST" class="mt-4">
+  <div class="form-group col-md-4">
+    <label for="id_agency">Nom de l'agence</label>
+    <select name="id_agency" id="id_agency">
+    <?php
       
+      $stmt = $conn->query("SELECT * FROM agencies");
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $option = '';
+      foreach ($result as $key => $value) {
+        // print_r($value);
+        $option = "<option value=" . $value['id_agency'] . ">" . $value['title'] . "</option>";
+        echo $option;
+      }
       ?>
-    </table>
-    <div class="form-group">
-      <label for="title">Titre du véhicule</label>
-      <input type="text" id="title" name="title" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="brand">Marque</label>
-      <input type="text" id="brand" list="brand-names" name="brand" class="form-control">
-      <datalist id="brand-names">
-      <!-- insert with jquery script -->
-      </datalist>
-    </div>
-    <div class="form-group">
-      <label for="model">Modèle</label>
-      <input type="text" id="model" name="model" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="description">Description du véhicule</label>
-      <textarea id="description" name="description" class="form-control"cols="30" rows="10"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="photo">Photo du véhicule</label>
-      <input type="file" name="photo" id="photo" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="daily_cost">Coût journalier</label>
-      <input type="number" step="0.01" id="daily_cost" name="daily_cost" class="form-control">
-    </div>
-    <input type="submit" value="Enregistrer">
-  </form>
-</div>
-<script src="../../scripts/jquery-3.3.1.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script> -->
-<!-- <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script> -->
+    </select>
+  </div>
+  <!-- vehicles table content into HTML table -->
+  <div id="table-container" style="width: 1140px; height: 420px" class="mb-4 overflow-auto">></div>
+    
+  </table>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="title">Titre du véhicule</label>
+          <input type="text" id="title" name="title" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="brand">Marque</label>
+          <input type="text" id="brand" list="brand-names" name="brand" class="form-control">
+          <datalist id="brand-names">
+          <!-- insert with jquery script -->
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="model">Modèle</label>
+          <input type="text" id="model" name="model" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="daily_cost">Coût journalier</label>
+          <input type="number" step="0.01" id="daily_cost" name="daily_cost" class="form-control">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="photo">Photo du véhicule</label>
+          <input type="file" name="photo" id="photo" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="description">Description du véhicule</label>
+          <textarea id="description" name="description" class="form-control"cols="30" rows="6"></textarea>
+        </div>
+        <input type="submit" value="Enregistrer">        
+      </div>
+    </div>
+  </div>
+  
+  
+</form>
+
+<script src="<?=SCRIPTS?>jquery-3.3.1.min.js"></script>
 
 <script>
 // car brands from json file
@@ -151,7 +153,7 @@ $.getJSON(url, function (data) {
 });
 </script>
 
-<script src="ajax-vehicles.js"></script>
+<script src="<?=SCRIPTS?>ajax-vehicles.js"></script>
 <?php
 // require_once("./toAjax-vehicles.php");
 require_once("../../inc/footer.php");
