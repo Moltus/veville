@@ -1,7 +1,10 @@
 <?php
-// require_once("init.php");
+
+require_once("../../inc/init.php");
 // extract($_POST);
-$id_agency = 3;
+// $id_agency = 3;
+$id_agency = $_GET['id_agency'];
+// echo $id_agency;
 
 $content = '';
 // echo $id_agency;
@@ -32,6 +35,7 @@ foreach ($result as $key => $value) {
 }
 $content .= '</table>';
 
-// echo json_encoe($content);
-echo $content;
+echo ($content);
+// json_encode($content)
+// echo $content;
 ?>

@@ -65,9 +65,9 @@ if ($_POST){
 <!-- Vehicle insert form -->
 
 
+<h1 class="m-4 text-center">Ajout de véhicules</h1>
 
 <div class="container">
-  <h1 class="m-4 text-center">Ajout de véhicules</h1>
   <?php echo $content ?>
   <?php echo $error ?>
   <form action="" method="POST" class="mt-4 col-md-4 offset-4">
@@ -124,6 +124,12 @@ if ($_POST){
   </form>
 </div>
 <script src="../../scripts/jquery-3.3.1.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script> -->
+<!-- <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script> -->
+
 
 <script>
 // car brands from json file
@@ -143,8 +149,9 @@ $.getJSON(url, function (data) {
   })
 });
 </script>
-<!-- <script src="ajax-vehicles.js"></script> -->
+
+<script src="ajax-vehicles.js"></script>
 <?php
-require_once("./toAjax-vehicles.php");
+// require_once("./toAjax-vehicles.php");
 require_once("../../inc/footer.php");
 ?>
