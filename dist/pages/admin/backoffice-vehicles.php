@@ -30,9 +30,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'modify') {
   }
 
   $vehicle_id = (isset($this_vehicle['id_vehicle'])) ? $this_vehicle['id_vehicle'] : '';
-} else
+} 
 
 if ($_POST){
+  // print_r($_POST);
 
   // parer aux failles XSS avec strip_tags pour retirer tous les chevrons
   foreach ($_POST as $key => $value) {
@@ -40,19 +41,36 @@ if ($_POST){
     
   }
 
-  if (count($_POST) === 7){
-    $content .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été ajouté !!</div>';;
+  if (
+    (isset($_POST['id_agency']) && $_POST['id_agency'] != "") &&
+    (isset($_POST['title']) && $_POST['title'] != "") &&
+    (isset($_POST['brand']) && $_POST['brand'] != "") &&
+    (isset($_POST['model']) && $_POST['model'] != "") &&
+    (isset($_POST['daily_cost']) && $_POST['daily_cost'] != "") &&
+    (isset($_POST['photo']) && $_POST['photo'] != "") &&
+    (isset($_POST['description']) && $_POST['description'] != "")
+    ){ 
+    if (isset($_POST['modify'])) { 
+      $content .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été modifié !!</div>';
+    } else {
+      $content .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été ajouté !!</div>';
+    }
   } else {
     $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de remplir tous les champs du formulaire</div>";
   }
 
   if (!$error) {
+    // modification statement
+    if (isset($_POST['modify'])) {
+      $result = $conn->prepare("UPDATE vehicles SET id_agency = :id_agency, title = :title, brand = :brand, model= :model, description = :description, photo = :photo, daily_cost = :daily_cost WHERE id_vehicle = :id_vehicle");
+    } else {
+      $result = $conn->prepare("INSERT INTO vehicles (id_agency, title, brand, model, description, photo, daily_cost) VALUES (:id_agency, :title, :brand, :model, :description, :photo, :daily_cost)");
+    }
 
-    // form insert query
-    $result = $conn->prepare("INSERT INTO vehicles (id_agency, title, brand, model, description, photo, daily_cost) VALUES (:id_agency, :title, :brand, :model, :description, :photo, :daily_cost)");
-
-    foreach ($_POST as $key => $value) {    
-      $result->bindValue(":$key", $value, PDO::PARAM_STR);   
+    foreach ($_POST as $key => $value) {
+      if ($key != 'modify') {    
+        $result->bindValue(":$key", $value, PDO::PARAM_STR);   
+      }
     }
 
     $result->execute();
@@ -61,13 +79,14 @@ if ($_POST){
 }
 ?>
 
-<!-- Vehicle insert form -->
-
+<!-- HTML -->
 
 <h1 class="m-4 text-center">Ajout de véhicules</h1>
 
 <?php echo $content ?>
 <?php echo $error ?>
+
+<!-- Vehicle insert form -->
 <form action="" method="POST" class="mt-4">
   <div class="form-group col-md-4">
     <label for="id_agency">Nom de l'agence</label>
@@ -124,14 +143,19 @@ if ($_POST){
           <label for="description">Description du véhicule</label>
           <textarea id="description" name="description" class="form-control" cols="30" rows="6"><?= (isset($this_vehicle)) ? $this_vehicle['description'] : '' ?></textarea>
         </div>
-        
+          
+        <!-- Vehicle modification inputs -->
+        <div class="form-group row" <?= 'style="display: ', (isset($_GET['action']) && $_GET['action'] == 'modify') ? 'inline"' : 'none"' ?>>
+          <label for="id_vehicle" class="col-sm-3 col-form-label">vehicule n°</label>
+          <input id="id_vehicle" name="id_vehicle" type="text" readonly class="col-2"
+          <?= 'value="' , (isset($_GET['id_vehicle'])) ? $_GET['id_vehicle'] : '', '"' ?>>       
+          <input id="modify-btn" class="btn btn-warning ml-2" type="submit" value="Modifier" name="modify">    
+        </div> 
+
+        <!-- submit vehicle input -->
         <input id="submit-btn" class="btn btn-primary" type="submit" value="Enregistrer"
         <?= 'style="display: ', (isset($_GET['action']) && $_GET['action'] == 'modify') ? 'none"' : 'inline"' ?>
-        >  
-
-        <input id="modify-btn" class="btn btn-warning"type="submit" value="Modifier" 
-        <?= 'style="display: ', (isset($_GET['action']) && $_GET['action'] == 'modify') ? 'inline"' : 'none"' ?>
-        >    
+        > 
       </div>
     </div>
   </div>
