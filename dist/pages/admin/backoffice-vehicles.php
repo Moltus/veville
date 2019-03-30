@@ -3,12 +3,12 @@ require_once("../../inc/init.php");
 require_once("../../inc/header.php");
 
 
-if(!isConnectedAsAdmin()) {
+if (!isConnectedAsAdmin()) {
   header("Location: pages/connexion.php");
 }
 
 // to remove vehicles
-if(isset($_GET['action']) && $_GET['action'] == 'remove'){
+if (isset($_GET['action']) && $_GET['action'] == 'remove'){
   // requete de suppression
   $result = $conn->prepare("DELETE FROM vehicles WHERE id_vehicle = :id_vehicle");
   $result->bindValue(':id_vehicle', $_GET['id_vehicle'], PDO::PARAM_INT);
@@ -18,23 +18,21 @@ if(isset($_GET['action']) && $_GET['action'] == 'remove'){
 }
 
 // to modify vehicles
-// Modification produits
-if(isset($_GET['action']) && $_GET['action'] == 'modify') {
+if (isset($_GET['action']) && $_GET['action'] == 'modify') {
   // verif sécu
-  if(isset($_GET['id_vehicle'])) {
+  if (isset($_GET['id_vehicle'])) {
     $result = $conn->prepare("SELECT * FROM vehicles WHERE id_vehicle = :id_vehicle");
     $result->bindValue(':id_vehicle', $_GET['id_vehicle']);
     $result->execute();
 
     $this_vehicle = $result->fetch(PDO::FETCH_ASSOC);
-    // echo '<pre>'; print_r($this_product); echo '</pre>';
+    // print_r($this_vehicle);
   }
 
   $vehicle_id = (isset($this_vehicle['id_vehicle'])) ? $this_vehicle['id_vehicle'] : '';
-}
+} else
 
 if ($_POST){
-  // print_r($_POST);
 
   // parer aux failles XSS avec strip_tags pour retirer tous les chevrons
   foreach ($_POST as $key => $value) {
@@ -73,15 +71,17 @@ if ($_POST){
 <form action="" method="POST" class="mt-4">
   <div class="form-group col-md-4">
     <label for="id_agency">Nom de l'agence</label>
-    <select name="id_agency" id="id_agency">
+    <select name="id_agency" id="id_agency" <?= 'value="', (isset($this_vehicle)) ? $this_vehicle['id_agency'] : '', '"' ?>>
     <?php
       
       $stmt = $conn->query("SELECT * FROM agencies");
       $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $option = '';
       foreach ($result as $key => $value) {
-        // print_r($value);
-        $option = "<option value=" . $value['id_agency'] . ">" . $value['title'] . "</option>";
+        $optionStatus = (isset($this_vehicle) && ($this_vehicle['id_agency'] == 
+        $value['id_agency'])) ? "selected" : "";
+        // echo $optionStatus;
+        $option = "<option value=" . $value['id_agency'] . ' ' . $optionStatus . ">" . $value['title'] . "</option>";
         echo $option;
       }
       ?>
@@ -97,34 +97,41 @@ if ($_POST){
       <div class="col-6">
         <div class="form-group">
           <label for="title">Titre du véhicule</label>
-          <input type="text" id="title" name="title" class="form-control">
+          <input type="text" id="title" name="title" <?= 'value="', (isset($this_vehicle)) ? $this_vehicle['title'] : '', '"' ?> class="form-control">
         </div>
         <div class="form-group">
           <label for="brand">Marque</label>
-          <input type="text" id="brand" list="brand-names" name="brand" class="form-control">
+          <input type="text" id="brand" list="brand-names" name="brand" <?= 'value="', (isset($this_vehicle)) ? $this_vehicle['brand'] : '', '"' ?> class="form-control">
           <datalist id="brand-names">
           <!-- insert with jquery script -->
           </datalist>
         </div>
         <div class="form-group">
           <label for="model">Modèle</label>
-          <input type="text" id="model" name="model" class="form-control">
+          <input type="text" id="model" name="model" <?= 'value="', (isset($this_vehicle)) ? $this_vehicle['model'] : '', '"' ?> class="form-control">
         </div>
         <div class="form-group">
           <label for="daily_cost">Coût journalier</label>
-          <input type="number" step="0.01" id="daily_cost" name="daily_cost" class="form-control">
+          <input type="number" step="0.01" id="daily_cost" name="daily_cost" <?= 'value="', (isset($this_vehicle)) ? $this_vehicle['daily_cost'] : '', '"' ?> class="form-control">
         </div>
       </div>
       <div class="col-6">
         <div class="form-group">
           <label for="photo">Photo du véhicule</label>
-          <input type="file" name="photo" id="photo" class="form-control">
+          <input type="file" name="photo" id="photo" <?= 'value="', (isset($this_vehicle)) ? $this_vehicle['photo'] : '', '"' ?> class="form-control">
         </div>
         <div class="form-group">
           <label for="description">Description du véhicule</label>
-          <textarea id="description" name="description" class="form-control"cols="30" rows="6"></textarea>
+          <textarea id="description" name="description" class="form-control" cols="30" rows="6"><?= (isset($this_vehicle)) ? $this_vehicle['description'] : '' ?></textarea>
         </div>
-        <input type="submit" value="Enregistrer">        
+        
+        <input id="submit-btn" class="btn btn-primary" type="submit" value="Enregistrer"
+        <?= 'style="display: ', (isset($_GET['action']) && $_GET['action'] == 'modify') ? 'none"' : 'inline"' ?>
+        >  
+
+        <input id="modify-btn" class="btn btn-warning"type="submit" value="Modifier" 
+        <?= 'style="display: ', (isset($_GET['action']) && $_GET['action'] == 'modify') ? 'inline"' : 'none"' ?>
+        >    
       </div>
     </div>
   </div>
