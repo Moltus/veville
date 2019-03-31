@@ -7,34 +7,19 @@
 
     <title>Véville locations véhicules</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?=STYLES?>bootstrap.min.css">
+    <!-- CSS perso -->
+    <link rel="stylesheet" href="<?=STYLES?>style.css">
+    <!-- datetimepicker -->
+    <link rel="stylesheet" href="<?=STYLES?>bootstrap-datetimepicker.min.css">
     <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <style>
-    .table-fix-head th { background-color: #eee; border-top: #dee2e6; border-bottom: #dee2e6; position: sticky; top: 0; }
+    <script src="<?=SCRIPTS?>jquery-3.3.1.min.js"></script>
+    
+    <script src="<?=SCRIPTS?>bootstrap.min.js"></script>
+    <script src="<?=SCRIPTS?>popper.min.js"></script>
+    <script src="<?=SCRIPTS?>bootstrap-datetimepicker.min.js"></script>
 
-    .home-hero {
-      position: relative;
-    }
 
-    .home-hero__image {
-      width: 100%;
-    }
-
-    .home-hero__title {
-      position: absolute;
-      width: 100%;
-      top: 5%;
-      text-align: center;
-      color: white;
-      text-shadow: 5px 5px 15px black;
-    }
-
-    .home-hero__form {
-      position: absolute;
-      bottom: 0;
-    }
-    </style>
   </head>
   <body>
      <nav class="navbar navbar-expand-md navbar-dark bg-dark">

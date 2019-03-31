@@ -18,6 +18,7 @@ define("INC", "/veville/dist/inc/");
 define("PAGES", "/veville/dist/pages/");
 // cette constante servira à enregistrer l'URL d'une photo/image dans la BDD, on ne conserve jamais la photo elle même, ce serait trop lourd pour le serveur.
 
+define("STYLES", "/veville/dist/styles/");
 define("SCRIPTS", "/veville/dist/scripts/");
 
 define("ADMIN", "/veville/dist/pages/admin/");

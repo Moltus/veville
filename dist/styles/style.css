@@ -1,0 +1,39 @@
+.table-fix-head th {
+  background-color: #eee; 
+  border-top: #dee2e6; 
+  border-bottom: #dee2e6; 
+  position: sticky; 
+  top: 0; 
+}
+
+.home-hero {
+  position: relative;
+}
+
+.home-hero__image {
+  width: 100%;
+  height: 100%;
+}
+
+.home-hero__title {
+  position: absolute;
+  width: 100%;
+  top: 5%;
+  text-align: center;
+  color: white;
+  text-shadow: 5px 5px 15px black;
+}
+
+.home-hero__form {
+  position: absolute;
+  bottom: 0;
+}
+@media only screen and (max-width: 900px) {
+  .home-hero__title {
+    top: 0;
+    font-size: 1.3rem;
+  }
+  .home-hero__form {
+    position: static;
+  }
+}
