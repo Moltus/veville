@@ -12,6 +12,28 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <style>
     .table-fix-head th { background-color: #eee; border-top: #dee2e6; border-bottom: #dee2e6; position: sticky; top: 0; }
+
+    .home-hero {
+      position: relative;
+    }
+
+    .home-hero__image {
+      width: 100%;
+    }
+
+    .home-hero__title {
+      position: absolute;
+      width: 100%;
+      top: 5%;
+      text-align: center;
+      color: white;
+      text-shadow: 5px 5px 15px black;
+    }
+
+    .home-hero__form {
+      position: absolute;
+      bottom: 0;
+    }
     </style>
   </head>
   <body>
@@ -68,4 +90,4 @@
       </div>
     </nav>
 
-    <section class="container pb-4">
+    

@@ -79,6 +79,7 @@ if ($_POST){
 ?>
 
 <!-- HTML -->
+<section class="container pb-4">
 
 <h1 class="m-4 text-center">Ajout/modification d'agences</h1>
 
@@ -177,7 +178,7 @@ echo $content;
   
   </form>
 </div>
-
+</section>
 <script src="<?=SCRIPTS?>jquery-3.3.1.min.js"></script>
 
 
