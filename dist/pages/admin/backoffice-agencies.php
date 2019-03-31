@@ -48,14 +48,14 @@ if ($_POST){
     (isset($_POST['zip_code']) && $_POST['zip_code'] != "") &&
     (isset($_POST['description']) && $_POST['description'] != "") &&
     (isset($_POST['photo']) && $_POST['photo'] != "")
-    ){ 
+    ) { 
     if (isset($_POST['modify'])) { 
       $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>L'agence : <strong>" . $_POST['title'] . '</strong> a bien été modifiée !!</div>';
     } else {
       $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>L'agence : <strong>" . $_POST['title'] . '</strong> a bien été ajoutée !!</div>';
     }
   } else {
-    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de remplir tous les champs du formulaire</div>";
+    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
   }
 
   if (!$error) {

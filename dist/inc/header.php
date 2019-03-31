@@ -57,8 +57,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdown04">
               <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-vehicles.php">Gestion vehicules</a>
               <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-agencies.php">Gestion agences</a>
-              <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-users
-              .php">Gestion utilisateurs</a>
+              <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-users.php">Gestion utilisateurs</a>
             </div>
           </li>
           <?php endif; ?>

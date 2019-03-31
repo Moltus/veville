@@ -12,12 +12,12 @@ if(isConnected()){
 
 if (isset($_GET['connect']) && $_GET['connect'] == 'valid') {
   //echo "connect = valid";
-  $content .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-success mt-4'>Vous êtes maintenant inscrit sur notre site. Vous pouvez dès à présent vous connecter !!</div>";
+  $info .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-success mt-4'>Vous êtes maintenant inscrit sur notre site. Vous pouvez dès à présent vous connecter !!</div>";
 }
 
 if ($_POST) {
   if (count($_POST) === 2){
-    // $content .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-success mt-4'>Formulaire correctement rempli</div>";
+    // $info .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-success mt-4'>Formulaire correctement rempli</div>";
 
       // parer aux failles XSS avec strip_tags pour retirer tous les chevrons
     foreach($_POST as $key => $value) {
@@ -53,7 +53,7 @@ if ($_POST) {
     $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Identifiant ou e-mail inexistant</div>";
   }
 
-  $content .= $error;
+  $info .= $error;
 
 }
 
@@ -61,7 +61,7 @@ require_once("../inc/header.php");
 
 ?>
 
-<?php echo $content ?>
+<?php echo $info ?>
 <div class="container">
   <h1 class="mt-4 text-center">Identification</h1>
   <?php echo $error ?>

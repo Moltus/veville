@@ -49,14 +49,14 @@ if ($_POST){
     (isset($_POST['daily_cost']) && $_POST['daily_cost'] != "") &&
     (isset($_POST['photo']) && $_POST['photo'] != "") &&
     (isset($_POST['description']) && $_POST['description'] != "")
-    ){ 
+    ) { 
     if (isset($_POST['modify'])) { 
       $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été modifié !!</div>';
     } else {
       $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été ajouté !!</div>';
     }
   } else {
-    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de remplir tous les champs du formulaire</div>";
+    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
   }
 
   if (!$error) {
@@ -90,7 +90,7 @@ if ($_POST){
 <form action="" method="POST" class="mt-4">
   <div class="form-group col-md-4">
     <label for="id_agency">Nom de l'agence</label>
-    <select name="id_agency" id="id_agency" <?= 'value="', (isset($this_vehicle)) ? $this_vehicle['id_agency'] : '', '"' ?>>
+    <select name="id_agency" id="id_agency">
     <?php
       
       $stmt = $conn->query("SELECT * FROM agencies");
