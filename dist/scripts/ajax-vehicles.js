@@ -1,42 +1,16 @@
-// $(document).ready(function() {
-  
-//   // get table entries from 
-//   $("#id_agency").on('change', function(e) {
-//     // console.log(this.value);
-//     ajaxQueryVehicles(2);
-//   });
-  
-//   function ajaxQueryVehicles(id_agency) {
-//     console.log(id_agency);
-//     let param = "id_agency=" + id_agency;
-
-//     $.post("toAjax-vehicles.php", param, function(data) {
-//       console.log("ajax query");
-//       $("#table-container").html(result);
-//     }, 'json')
-//   }
-// })
 
 
-// $.ajax method
-// $(document).ready(function() {
-//   $(document).on("change", '#id_agency', function (e) {
-//     var param = $(this).val();
 
+let agency = document.querySelector("#id_agency");
+let div = document.querySelector("#table-container");
+// let agencyVal = agency.value;
+agency.addEventListener("change", function(e) {
+  // insertPost({id_agency: agency.value}) ;
+  // insertPost("id_agency=" + agencyVal)
+  getVehicles();
+} )
 
-//     $.ajax({
-//       type: "POST",
-//       data: param,
-//       url: 'toAjax-vehicles.php',
-//       dataType: 'json',
-//       success: function (result) {
-//         $("#table-container").html(result);
-//       }
-//     });
-
-//   });
-// })
-
+// JS Fetch method
 function getVehicles() {
   fetch('toAjax-vehicles.php?id_agency=' + agency.value)
     .then(function (response) {
@@ -46,17 +20,6 @@ function getVehicles() {
       div.innerHTML = data;
     })
 }
-
-
-// JS Fetch method
-let agency = document.querySelector("#id_agency");
-let div = document.querySelector("#table-container");
-// let agencyVal = agency.value;
-agency.addEventListener("change", function(e) {
-  // insertPost({id_agency: agency.value}) ;
-  // insertPost("id_agency=" + agencyVal)
-  getVehicles();
-} )
 
 getVehicles();
 

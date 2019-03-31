@@ -14,7 +14,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'remove'){
   $result->bindValue(':id_vehicle', $_GET['id_vehicle'], PDO::PARAM_INT);
   $result->execute();
 
-  $content .= "<div class='col-md-6 offset-md-3 alert alert-success text-center'>Le véhicule n° <strong>$_GET[id_vehicle]</strong> a bien été supprimé.</div>";
+  $info .= "<div class='col-md-6 offset-md-3 alert alert-success text-center'>Le véhicule n° <strong>$_GET[id_vehicle]</strong> a bien été supprimé.</div>";
 }
 
 // to modify vehicles
@@ -51,9 +51,9 @@ if ($_POST){
     (isset($_POST['description']) && $_POST['description'] != "")
     ){ 
     if (isset($_POST['modify'])) { 
-      $content .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été modifié !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été modifié !!</div>';
     } else {
-      $content .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été ajouté !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été ajouté !!</div>';
     }
   } else {
     $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de remplir tous les champs du formulaire</div>";
@@ -81,9 +81,9 @@ if ($_POST){
 
 <!-- HTML -->
 
-<h1 class="m-4 text-center">Ajout de véhicules</h1>
+<h1 class="m-4 text-center">Ajout/modification de véhicules</h1>
 
-<?php echo $content ?>
+<?php echo $info ?>
 <?php echo $error ?>
 
 <!-- Vehicle insert form -->
@@ -107,9 +107,7 @@ if ($_POST){
     </select>
   </div>
   <!-- vehicles table content into HTML table -->
-  <div id="table-container" style="width: 1140px; height: 420px" class="mb-4 overflow-auto">></div>
-    
-  </table>
+  <div id="table-container" style="width: 1140px; height: 420px" class="mb-4 overflow-auto"></div>
 
   <div class="container">
     <div class="row">
@@ -143,19 +141,25 @@ if ($_POST){
           <label for="description">Description du véhicule</label>
           <textarea id="description" name="description" class="form-control" cols="30" rows="6"><?= (isset($this_vehicle)) ? $this_vehicle['description'] : '' ?></textarea>
         </div>
-          
-        <!-- Vehicle modification inputs -->
-        <div class="form-group row" <?= 'style="display: ', (isset($_GET['action']) && $_GET['action'] == 'modify') ? 'inline"' : 'none"' ?>>
-          <label for="id_vehicle" class="col-sm-3 col-form-label">vehicule n°</label>
-          <input id="id_vehicle" name="id_vehicle" type="text" readonly class="col-2"
-          <?= 'value="' , (isset($_GET['id_vehicle'])) ? $_GET['id_vehicle'] : '', '"' ?>>       
-          <input id="modify-btn" class="btn btn-warning ml-2" type="submit" value="Modifier" name="modify">    
-        </div> 
 
-        <!-- submit vehicle input -->
-        <input id="submit-btn" class="btn btn-primary" type="submit" value="Enregistrer"
-        <?= 'style="display: ', (isset($_GET['action']) && $_GET['action'] == 'modify') ? 'none"' : 'inline"' ?>
-        > 
+        <!-- submits inputs -->
+        <?php 
+        $content = "";
+        if (isset($_GET['action']) && $_GET['action'] == 'modify') {
+          // vehicle modification inputs
+          $content .= '<div class="form-group row">';
+          $content .= '<label for="id_vehicle" class="col-sm-3 col-form-label">Véhicule n°</label>';
+          $content .= '<input id="id_vehicle" name="id_vehicle" type="text" readonly class="col-2" value="' . $_GET['id_vehicle'] . '">';
+          $content .= '<input id="modify-btn" class="btn btn-warning ml-2" type="submit" value="Modifier" name="modify">';
+          $content .= '<a  class="btn btn-info ml-2" href="javascript:window.location = window.location.href.split(' . "'?'" . ')[0]">Annuler</a></div>';
+
+          echo $content;
+        } else {
+          // submit vehicle input
+          echo '<input id="submit-btn" class="btn btn-primary" type="submit" value="Enregistrer">';
+        }
+        ?>
+        
       </div>
     </div>
   </div>

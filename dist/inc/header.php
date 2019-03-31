@@ -53,7 +53,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Back Office</a>
             <div class="dropdown-menu" aria-labelledby="dropdown04">
               <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-vehicles.php">Gestion vehicules</a>
-              <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-agency.php">Gestion agences</a>
+              <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-agencies.php">Gestion agences</a>
               <a class="dropdown-item" href="<?=PAGES?>admin/backoffice-users
               .php">Gestion utilisateurs</a>
             </div>

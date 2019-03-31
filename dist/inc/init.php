@@ -25,7 +25,7 @@ define("ADMIN", "/veville/dist/pages/admin/");
 define("IMAGES", "/veville/dist/images/");
 
 // ------- VARIABLES
-$content = '';
+$info = '';
 $error = '';
 $profile = Array();
 
