@@ -86,7 +86,7 @@ if ($_POST){
 <?php echo $error ?>
   
 <!-- vehicles table content into HTML table -->
-<div id="table-container" style="width: 1140px; height: 420px" class="mb-4 overflow-auto">
+<div id="table-container" style="width: 1140px; height: 420px" class="mb-4 overflow-auto table-fix-head">
 <?php 
 $content = "";
 
@@ -160,7 +160,7 @@ echo $content;
           // agency modification inputs
           $content .= '<div class="form-group row">';
           $content .= '<label for="id_agency" class="col-sm-3 col-form-label">Agence n°</label>';
-          $content .= '<input id="id_agency" name="id_agency" type="text" readonly class="col-2" value="' . $_GET['id_agency'] . '">';
+          $content .= '<input id="id_agency" name="id_agency" type="text" readonly class="form-control col-2" value="' . $_GET['id_agency'] . '">';
           $content .= '<input id="modify-btn" class="btn btn-warning ml-2" type="submit" value="Modifier" name="modify">';
           $content .= '<a  class="btn btn-info ml-2" href="javascript:window.location = window.location.href.split(' . "'?'" . ')[0]">Annuler</a></div>';
 
