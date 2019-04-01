@@ -82,7 +82,7 @@ if (isset($_GET['find_vehicle'])) {
       $content .= "<input type='hidden' id='date_return' name='date_return' value='{$_GET['date_return']}'>";
       
       foreach ($value as $subkey => $subvalue) {
-        if ($subkey == 'id_vehicle' || $subkey == 'id_agency') {
+        if ($subkey == 'id_vehicle' || $subkey == 'id_agency' || $subkey == 'total_cost') {
           $content .= "<input type='hidden' id='$subkey' name='$subkey' value='$subvalue'>";
         } else if ($subkey == 'photo') {
           $content .= "<div class='col-3'>";
@@ -91,8 +91,9 @@ if (isset($_GET['find_vehicle'])) {
         } else if ($subkey == 'daily_cost') {
           $total = $subvalue * $nbDays;
           $content .= "<div class='col-2'>";
-          $content .= "<label for='total_cost'>Coût total pour $nbDays jours</label>" ;
-          $content .= "<input type='number' id='total_cost' name='total_cost' value=$total readonly class='form-control'>"; 
+          $content .= "<p class='p-2 bg-success text-white text-center rounded-pill'>$total €<p>";
+          $content .= "<p>Prix pour $nbDays jours</p>" ;
+          $content .= "<input type='hidden' id='total_cost' name='total_cost' value=$total>"; 
           $content .= "</div>";      
         } else if ($subkey == 'title') {
           $content .= "<div class='col-2'>";
@@ -104,7 +105,7 @@ if (isset($_GET['find_vehicle'])) {
           $content .= "</div>";
         }
       }
-      $content .= "<div class='col-2'><input type='submit' class='btn btn-primary' value='Choisir'></div>";
+      $content .= "<p> </p><div class='col-2'><input type='submit' class='rounded-pill py-2 px-4 btn btn-primary' value='Choisir'></div>";
       $content .= "</div></form></div>";
     }
     
@@ -209,6 +210,29 @@ if ($_POST & !empty($_POST)) {
 <?= $info ?>
 <?= $error ?>
 <?= $content ?>
+
+<?php
+if (
+  !(isset($_GET['find_vehicle']) &&
+  isset($_GET['id_agency']) &&
+  isset($_GET['date_pickup']) &&
+  isset($_GET['date_return']))
+) {
+  $stmt = $conn->query("SELECT title, description, photo, daily_cost FROM vehicles GROUP BY vehicles.title ORDER BY daily_cost");
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  echo "<div class='d-flex mt-4 flex-wrap'>";
+  foreach ($result as $key => $value) {
+    echo "<div class='p-2 card col-3' style='width:20rem;'>";
+    echo "<img src='photos/vehicles/{$value['photo']}' class='img-fluid card_img_top' alt={$value['title']}>";
+    echo "<div class='card-body'>";
+    echo "<h5 class='card-title'>{$value['title']}</h5>";
+    echo "<p class='card-text'>{$value['description']}</p>";
+    echo "<p class='card-text'>{$value['daily_cost']} €/jour</p>";
+    echo "</div></div>";
+  }
+  echo "</div>";
+} 
+?>
 <img src="images/bg-image.jpg" alt="background-image" class="img-fluid">
 
 
