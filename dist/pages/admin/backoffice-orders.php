@@ -54,7 +54,7 @@ if ($_POST & !empty($_POST)){
     $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>La commande : <strong>" . $_POST['id_order'] . '</strong> a bien été modifiée !!</div>';
     
   } else {
-    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
+    $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
   }
 
   if (!$error) {

@@ -15,12 +15,12 @@ if (isset($_GET['find_vehicle'])) {
     $date_return = new DateTime($_GET['date_return']);
     // echo ($date_pickup < $date_return) ? "date retour bien supérieur" : "date retour inférieure ! danger";
     if ($date_pickup > $date_return) {
-      $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Attention de bien préciser une date de retour ultérieure à la date de départ.</div>";
+      $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Attention de bien préciser une date de retour ultérieure à la date de départ.</div>";
     }
     $interval = $date_pickup->diff($date_return);
     $nbDays = $interval->format('%a');
     if ($nbDays < 1) {
-      $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>La location de véhicules est prévue pour une journée au minimum.</div>";
+      $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>La location de véhicules est prévue pour une journée au minimum.</div>";
     }
 
     if (isset($_GET['order']) && $_GET['order'] == 'ascending') {
@@ -65,15 +65,15 @@ if (isset($_GET['find_vehicle'])) {
       // print_r($result);
 
     } else {
-      $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Aucun véhicule n'a été trouvé pour ces critères.</div>";
+      $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Aucun véhicule n'a été trouvé pour ces critères.</div>";
     }
 
   } else {
-    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire.</div>";
+    $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire.</div>";
   }
 
   if (!$error) {
-    $content .= "<div id='results' class='container d-flex justify-content-end'><a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=ascending&find_vehicle' class='mx-2 '>prix <strong>&#8593;</strong></a>";
+    $content .= "<div id='results' class='container d-flex justify-content-end pt-3'><a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=ascending&find_vehicle' class='mx-2 '>prix <strong>&#8593;</strong></a>";
     $content .= "<a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=descending&find_vehicle' class='mx-2 '>prix <strong>&#8595;</strong></a></div>";
     
     foreach ($result as $key => $value) {
@@ -92,7 +92,7 @@ if (isset($_GET['find_vehicle'])) {
           $total = $subvalue * $nbDays;
           $content .= "<div class='col-2'>";
           $content .= "<p class='p-2 bg-success text-white text-center rounded-pill'>$total €<p>";
-          $content .= "<p>Prix pour $nbDays jours</p>" ;
+          $content .= "<p class='text-center'>Prix pour $nbDays jours</p>" ;
           $content .= "<input type='hidden' id='total_cost' name='total_cost' value=$total>"; 
           $content .= "</div>";      
         } else if ($subkey == 'title') {
@@ -105,7 +105,7 @@ if (isset($_GET['find_vehicle'])) {
           $content .= "</div>";
         }
       }
-      $content .= "<p> </p><div class='col-2'><input type='submit' class='rounded-pill py-2 px-4 btn btn-primary' value='Choisir'></div>";
+      $content .= "<p> </p><div class='col-2 container d-flex justify-content-end align-content-start flex-wrap'><input type='submit' class='rounded-pill py-2 px-4 btn btn-primary' value='Choisir'></div>";
       $content .= "</div></form></div>";
     }
     
@@ -142,10 +142,10 @@ if ($_POST & !empty($_POST)) {
       header("Location: pages/orders.php");
 
     } else {
-      $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Une erreur s'est produite, veuillez renouveller la recherche.</div>";
+      $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Une erreur s'est produite, veuillez renouveller la recherche.</div>";
     }
   } else {
-    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Veuillez vous identifier pour valider une commande de véhicule.</div>";
+    $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Veuillez vous identifier pour valider une commande de véhicule.</div>";
   } 
 }
 ?>

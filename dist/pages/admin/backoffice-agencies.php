@@ -55,7 +55,7 @@ if ($_POST & !empty($_POST)){
       $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>L'agence : <strong>" . $_POST['title'] . '</strong> a bien été ajoutée !!</div>';
     }
   } else {
-    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
+    $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
   }
 
   if (!$error) {

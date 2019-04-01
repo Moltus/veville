@@ -21,7 +21,7 @@ if ($_POST){
   if (count($_POST) === 7){
     echo '<strong>Formulaire correctement rempli</strong>';
   } else {
-    $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de remplir tous les champs du formulaire</div>";
+    $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de remplir tous les champs du formulaire</div>";
   }
 
   $userCheck = $conn->prepare("SELECT * FROM users WHERE user_name = :user_name");
