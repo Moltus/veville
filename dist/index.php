@@ -22,7 +22,15 @@ if (isset($_GET['find_vehicle'])) {
     if ($nbDays < 1) {
       $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>La location de véhicules est prévue pour une journée au minimum.</div>";
     }
-    $stmt = $conn->query("SELECT id_vehicle, id_agency, title, description, photo, daily_cost FROM vehicles WHERE id_agency = $id_agency");
+
+    if (isset($_GET['order']) && $_GET['order'] == 'ascending') {
+      $stmt = $conn->query("SELECT id_vehicle, id_agency, title, description, photo, daily_cost FROM vehicles WHERE id_agency = $id_agency ORDER BY daily_cost ASC");
+    } else if (isset($_GET['order']) && $_GET['order'] == 'descending') {
+      $stmt = $conn->query("SELECT id_vehicle, id_agency, title, description, photo, daily_cost FROM vehicles WHERE id_agency = $id_agency ORDER BY daily_cost DESC");
+    } else {
+      $stmt = $conn->query("SELECT id_vehicle, id_agency, title, description, photo, daily_cost FROM vehicles WHERE id_agency = $id_agency");
+    }
+    
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // print_r($result);
@@ -65,6 +73,9 @@ if (isset($_GET['find_vehicle'])) {
   }
 
   if (!$error) {
+    $content .= "<div id='results' class='container d-flex justify-content-end'><a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=ascending&find_vehicle' class='mx-2 '>prix <strong>&#8593;</strong></a>";
+    $content .= "<a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=descending&find_vehicle' class='mx-2 '>prix <strong>&#8595;</strong></a></div>";
+    
     foreach ($result as $key => $value) {
       $content .= "<div class='container'><form action='' method='POST' class='mt-4'><div class='row'>";
       $content .= "<input type='hidden' id='date_pickup' name='date_pickup' value='{$_GET['date_pickup']}'>";

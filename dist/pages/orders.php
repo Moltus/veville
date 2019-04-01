@@ -19,6 +19,20 @@ if (!isConnected()) {
       <th>Coût total</th>
       <th>Date de la commande</th>
     </tr>
+    <?php
+    $id_user = $_SESSION['user']['id_user'];
+    $stmt = $conn->query("SELECT id_order, agencies.title, date_pickup, date_return, total_cost, date_order FROM orders LEFT JOIN agencies ON orders.id_agency = agencies.id_agency WHERE orders.id_user = $id_user");
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $key => $value) {
+      echo "<tr>";
+      foreach ($value as $subkey => $subvalue) {
+        if ($subkey == 'total_cost') echo "<td>$subvalue €</td>";
+        else echo "<td>$subvalue</td>";
+      }
+      echo "</tr>";
+    }
+    ?>
   </table>
 </div>
 <img src="../images/bg-image.jpg" alt="" class="img-fluid">
