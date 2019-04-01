@@ -1,5 +1,20 @@
 
+// car brands from json file
+let dropdown = $('#brand-names');
 
+dropdown.empty();
+
+dropdown.append('<option selected="true" disabled>marque du véhicule</option>');
+dropdown.prop('selectedIndex', 0);
+
+const url = '../../data/brands.json';
+
+// Populate dropdown with list of car brands
+$.getJSON(url, function (data) {
+  $.each(data, function (key, entry) {
+    dropdown.append($('<option></option>').attr('value', key).text(key));
+  })
+});
 
 let agency = document.querySelector("#id_agency");
 let div = document.querySelector("#table-container");
@@ -9,7 +24,7 @@ agency.addEventListener("change", function(e) {
   getVehicles();
 } )
 
-// JS Fetch method
+// JS Fetch method for getting vehicles table
 function getVehicles() {
   fetch('toAjax-vehicles.php?id_agency=' + agency.value)
     .then(function (response) {
@@ -19,8 +34,7 @@ function getVehicles() {
       div.innerHTML = data;
     })
 }
-
-getVehicles();
+  getVehicles();
 
 // const insertPost = async function (data) {
 //   let response = await fetch('toAjax-vehicles.php', {

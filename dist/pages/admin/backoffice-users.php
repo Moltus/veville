@@ -32,7 +32,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'modify') {
   $user_id = (isset($this_user['id_user'])) ? $this_user['id_user'] : '';
 } 
 
-if ($_POST){
+if ($_POST & !empty($_POST)){
   // print_r($_POST);
 
   // parer aux failles XSS avec strip_tags pour retirer tous les chevrons
@@ -79,7 +79,11 @@ if ($_POST){
       $result = $conn->prepare("INSERT INTO users (user_name, password, family_name, first_name, email, sex, status) VALUES (:user_name, :password, :family_name, :first_name, :email, :sex, :status)");
       
       foreach ($_POST as $key => $value) {  
-        $result->bindValue(":$key", $value, PDO::PARAM_STR);      
+        if ($key === 'password') {
+          $result->bindValue(":$key", password_hash($value, PASSWORD_DEFAULT), PDO::PARAM_STR);
+        } else {
+          $result->bindValue(":$key", $value, PDO::PARAM_STR);      
+        }
       }
     }
 

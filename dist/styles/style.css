@@ -15,13 +15,24 @@
   height: 100%;
 }
 
-.home-hero__title {
+.home-hero__text {
   position: absolute;
   width: 100%;
   top: 5%;
+}
+
+.home-hero__title {
+  font-size: 2rem;
   text-align: center;
   color: white;
   text-shadow: 5px 5px 15px black;
+}
+
+.home-hero__subtitle {
+  font-size: 1.1rem;
+  text-align: center;
+  color: white;
+  text-shadow: 3px 3px 8px black;
 }
 
 .home-hero__form {
@@ -29,11 +40,25 @@
   bottom: 0;
 }
 @media only screen and (max-width: 900px) {
+  .home-hero__text {
+    top: 0;   
+  }
   .home-hero__title {
-    top: 0;
-    font-size: 1.3rem;
+    font-size: 1.3rem; 
+  }
+  .home-hero__subtitle {
+    font-size: .8rem;
   }
   .home-hero__form {
     position: static;
   }
+}
+
+.background-image {
+  opacity: .7;
+  position: absolute;
+}
+
+.container {
+  background-color: white;
 }

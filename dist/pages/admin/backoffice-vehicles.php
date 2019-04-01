@@ -32,7 +32,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'modify') {
   $vehicle_id = (isset($this_vehicle['id_vehicle'])) ? $this_vehicle['id_vehicle'] : '';
 } 
 
-if ($_POST){
+if ($_POST & !empty($_POST)){
   // print_r($_POST);
 
   // parer aux failles XSS avec strip_tags pour retirer tous les chevrons
@@ -168,25 +168,6 @@ if ($_POST){
 </form>
 </section>
 <script src="<?=SCRIPTS?>jquery-3.3.1.min.js"></script>
-
-<script>
-// car brands from json file
-let dropdown = $('#brand-names');
-
-dropdown.empty();
-
-dropdown.append('<option selected="true" disabled>marque du véhicule</option>');
-dropdown.prop('selectedIndex', 0);
-
-const url = '../../data/brands.json';
-
-// Populate dropdown with list of car brands
-$.getJSON(url, function (data) {
-  $.each(data, function (key, entry) {
-    dropdown.append($('<option></option>').attr('value', key).text(key));
-  })
-});
-</script>
 
 <script src="<?=SCRIPTS?>ajax-vehicles.js"></script>
 <?php

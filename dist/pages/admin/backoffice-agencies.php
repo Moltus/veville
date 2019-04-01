@@ -32,7 +32,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'modify') {
   $agency_id = (isset($this_agency['id_agency'])) ? $this_agency['id_agency'] : '';
 } 
 
-if ($_POST){
+if ($_POST & !empty($_POST)){
   // print_r($_POST);
 
   // parer aux failles XSS avec strip_tags pour retirer tous les chevrons
@@ -136,6 +136,7 @@ echo $content;
         <div class="form-group">
           <label for="photo">Photo de l'agence</label>
           <input type="file" name="photo" id="photo" <?= 'value="', (isset($this_agency)) ? $this_agency['photo'] : '', '"' ?> class="form-control">
+          
         </div>
         
       </div>
