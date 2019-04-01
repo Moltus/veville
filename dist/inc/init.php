@@ -28,6 +28,7 @@ define("IMAGES", "/veville/dist/images/");
 // ------- VARIABLES
 $info = '';
 $error = '';
+$content = '';
 $profile = Array();
 
 // ------- INCLUSIONS 

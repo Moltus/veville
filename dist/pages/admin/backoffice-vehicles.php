@@ -86,7 +86,7 @@ if ($_POST){
 <?php echo $info ?>
 <?php echo $error ?>
 
-<!-- Vehicle insert form -->
+<!-- Vehicle insert/modify form -->
 <form action="" method="POST" class="mt-4">
   <div class="form-group col-md-4">
     <label for="id_agency">Nom de l'agence</label>
@@ -99,7 +99,6 @@ if ($_POST){
       foreach ($result as $key => $value) {
         $optionStatus = (isset($this_vehicle) && ($this_vehicle['id_agency'] == 
         $value['id_agency'])) ? "selected" : "";
-        // echo $optionStatus;
         $option = "<option value=" . $value['id_agency'] . ' ' . $optionStatus . ">" . $value['title'] . "</option>";
         echo $option;
       }
@@ -109,6 +108,7 @@ if ($_POST){
   <!-- vehicles table content into HTML table -->
   <div id="table-container" style="width: 1140px; height: 420px" class="mb-4 overflow-auto table-fix-head"></div>
 
+  <!-- rest of the form -->
   <div class="container">
     <div class="row">
       <div class="col-6">

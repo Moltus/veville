@@ -3,10 +3,9 @@
 
 let agency = document.querySelector("#id_agency");
 let div = document.querySelector("#table-container");
-// let agencyVal = agency.value;
+
 agency.addEventListener("change", function(e) {
-  // insertPost({id_agency: agency.value}) ;
-  // insertPost("id_agency=" + agencyVal)
+
   getVehicles();
 } )
 
