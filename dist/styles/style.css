@@ -66,3 +66,27 @@
 .container {
   background-color: white;
 }
+
+.ascending__triangle {
+	display: inline-block;
+    /* margin-left: 5px; */
+    /* padding-bottom: 2px; */
+    width: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid #007bff;
+}
+.ascending:hover .ascending__triangle {
+  border-bottom: 10px solid #005ab1;
+}
+.descending__triangle {
+	display: inline-block;
+    /* margin-left: 5px; */
+    /* padding-bottom: 2px; */
+    width: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #007bff;
+}
+.descending:hover .descending__triangle{
+  border-top: 10px solid #005ab1;

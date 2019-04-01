@@ -73,8 +73,8 @@ if (isset($_GET['find_vehicle'])) {
   }
 
   if (!$error) {
-    $content .= "<div id='results' class='container d-flex justify-content-end pt-3'><a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=ascending&find_vehicle' class='mx-2 '>prix <strong>&#8593;</strong></a>";
-    $content .= "<a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=descending&find_vehicle' class='mx-2 '>prix <strong>&#8595;</strong></a></div>";
+    $content .= "<div id='results' class='container d-flex justify-content-end pt-3'><a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=ascending&find_vehicle' class='mx-2 ascending'><strong>prix <span class='ascending__triangle'></span></strong> </a>";
+    $content .= "<a href='?id_agency={$_GET['id_agency']}&date_pickup={$_GET['date_pickup']}&date_return={$_GET['date_return']}&order=descending&find_vehicle' class='mx-2 descending'><strong>prix <span class='descending__triangle'></span> </strong></a></div>";
     
     foreach ($result as $key => $value) {
       $content .= "<div class='container'><form action='' method='POST' class='mt-4'><div class='row'>";
@@ -105,7 +105,8 @@ if (isset($_GET['find_vehicle'])) {
           $content .= "</div>";
         }
       }
-      $content .= "<p> </p><div class='col-2 container d-flex justify-content-end align-content-start flex-wrap'><input type='submit' class='rounded-pill py-2 px-4 btn btn-primary' value='Choisir'></div>";
+      $value = isConnected() ? 'Réserver' : 'Choisir';
+      $content .= "<p> </p><div class='col-2 container d-flex justify-content-end align-content-start flex-wrap'><input type='submit' class='rounded-pill py-2 px-4 btn btn-primary' value=$value></div>";
       $content .= "</div></form></div>";
     }
     
@@ -227,7 +228,7 @@ if (
     echo "<div class='card-body'>";
     echo "<h5 class='card-title'>{$value['title']}</h5>";
     echo "<p class='card-text'>{$value['description']}</p>";
-    echo "<p class='card-text'>{$value['daily_cost']} €/jour</p>";
+    echo "<p class='card-text'><strong>{$value['daily_cost']} €/jour</strong></p>";
     echo "</div></div>";
   }
   echo "</div>";

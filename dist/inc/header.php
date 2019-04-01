@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Véville locations véhicules</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="<?=ROOT?>apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?=ROOT?>favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?=ROOT?>favicon-16x16.png">
+    <link rel="manifest" href="<?=ROOT?>site.webmanifest">
+    <link rel="mask-icon" href="<?=ROOT?>safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?=STYLES?>bootstrap.min.css">
     <!-- CSS perso -->
@@ -58,7 +66,46 @@
           </li> -->
           <?php endif; ?>
 
-          <?php if(isConnectedAsAdmin()): ?>
+          <?php if (!isConnectedAsAdmin()): ?>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="modal" href="#" data-target="#exampleModal">Contactez-nous</a>
+          </li>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Contactez-nous </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class=enctype="text/plain" method="get" action="mailto:donaldtrump@fakenews.com">
+                    <div class="form-group">
+                      <label for="contact_name">Nom de famille</label>
+                      <input type="text" class="form-control" name="contact_name" id="contact_name">
+                    </div>
+                    <div class="form-group">
+                      <label for="contact_firstname">Prénom</label>
+                      <input type="text" class="form-control" name="contact_firstname" id="contact_firstname">
+                    </div>
+                    <div class="form-group">
+                      <label for="contact_comments">Commentaires</label>
+                      <textarea name="contact_comments" id="contact_comments" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      <input type="submit" value="Envoyer" class="btn btn-primary">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php endif; ?>
+
+          <?php if (isConnectedAsAdmin()): ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Back Office</a>
             <div class="dropdown-menu" aria-labelledby="dropdown04">
