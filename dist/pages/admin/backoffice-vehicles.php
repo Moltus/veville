@@ -74,7 +74,7 @@ if ($_POST & !empty($_POST)){
     }
 
     $result->execute();
-
+    header("Location: backoffice-vehicles.php");
   }
 }
 ?>

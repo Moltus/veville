@@ -89,7 +89,7 @@ if ($_POST & !empty($_POST)){
 
 
     $result->execute();
-
+    header("Location: backoffice-users.php");
   }
 }
 ?>
