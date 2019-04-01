@@ -13,17 +13,53 @@ if (isset($_GET['find_vehicle'])) {
     $id_agency = $_GET['id_agency'];
     $date_pickup = new DateTime($_GET['date_pickup']);
     $date_return = new DateTime($_GET['date_return']);
+    // echo ($date_pickup < $date_return) ? "date retour bien supérieur" : "date retour inférieure ! danger";
+    if ($date_pickup > $date_return) {
+      $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Attention de bien préciser une date de retour ultérieure à la date de départ.</div>";
+    }
     $interval = $date_pickup->diff($date_return);
     $nbDays = $interval->format('%a');
+    if ($nbDays < 1) {
+      $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>La location de véhicules est prévue pour une journée au minimum.</div>";
+    }
     $stmt = $conn->query("SELECT id_vehicle, id_agency, title, description, photo, daily_cost FROM vehicles WHERE id_agency = $id_agency");
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // print_r($result);
     if (!empty($result)) {
       $info .= "<div class='col-md-6 mx-auto alert alert-info text-center'>Veuillez choisir un véhicule</div>";
+
+      // echo "before filter : ";
+      // print_r($result);
+      // echo "<br>";
+
+      foreach ($result as $key => $value) {
+        $id_vehicle = $value['id_vehicle'];
+        // echo "id : ", $id_vehicle, " - ";
+        $stmt = $conn->query("SELECT date_pickup, date_return FROM vehicles LEFT JOIN orders ON vehicles.id_vehicle = orders.id_vehicle WHERE vehicles.id_vehicle = $id_vehicle");
+        $result2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // print_r($result2);
+        // echo $result2[0]['date_pickup'];
+        // echo $result2[0]['date_return'];
+        if (
+          ($_GET['date_return'] >= $result2[0]['date_pickup'] && 
+          $_GET['date_return'] <= $result2[0]['date_return'])
+          || 
+          ($_GET['date_pickup'] <= $result2[0]['date_return'] && 
+          $_GET['date_pickup'] >= $result2[0]['date_pickup'])
+          ) {
+          // echo "key : $key, id_vehicule : $id_vehicle";
+          unset($result[$key]);
+        }
+      }
+
+      // echo "<br>after filter : ";
+      // print_r($result);
+
     } else {
       $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Aucun véhicule n'a été trouvé pour ces critères.</div>";
     }
+
   } else {
     $error .= "<div class='col-md-5 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire.</div>";
   }
@@ -160,6 +196,7 @@ if ($_POST & !empty($_POST)) {
   </form>
 </div>
 <?= $info ?>
+<?= $error ?>
 <?= $content ?>
 <img src="images/bg-image.jpg" alt="background-image" class="img-fluid">
 

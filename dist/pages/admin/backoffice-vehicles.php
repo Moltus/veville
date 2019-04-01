@@ -81,7 +81,7 @@ if ($_POST & !empty($_POST)){
 
 <!-- HTML -->
 <section class="container pb-4">
-<h1 class="m-4 text-center">Ajout/modification de véhicules</h1>
+<h2 class="m-4 text-center">Ajout/modification de véhicules</h2>
 
 <?php echo $info ?>
 <?php echo $error ?>

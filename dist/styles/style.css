@@ -59,6 +59,10 @@
   position: absolute;
 }
 
+.bg-image {
+  background-image: url(../images/bg-image.jpg);
+}
+
 .container {
   background-color: white;
 }

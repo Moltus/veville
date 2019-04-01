@@ -76,7 +76,8 @@ require_once("../inc/header.php");
     </div>
     <input type="submit" value="valider">
   </form>
-</div>
+</div class="pb-4">
+<img src="../images/bg-image.jpg" alt="" class="img-fluid">
 
 
 <?php

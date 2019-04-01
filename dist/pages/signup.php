@@ -115,7 +115,7 @@ if ($_POST){
   </div> -->
   <input type="submit" value="valider">
 </form>
-
+<img src="../images/bg-image.jpg" alt="" class="img-fluid">
 
 <?php
 require_once("../inc/footer.php");
