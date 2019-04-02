@@ -51,18 +51,32 @@ if ($_POST & !empty($_POST)){
     (isset($_POST['description']) && $_POST['description'] != "")
     ) { 
     if (isset($_POST['modify'])) { 
-      $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été modifié !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le véhicule <strong>" . $_POST['title'] . '</strong> a bien été modifié !!</div>';
     } else {
-      $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le véhicule : <strong>" . $_POST['title'] . '</strong> a bien été ajouté !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le véhicule <strong>" . $_POST['title'] . '</strong> a bien été ajouté !!</div>';
     }
-  } else {
-    $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
-  }
+  } else if (isset($_POST['modify']) &&
+    (isset($_POST['id_agency']) && $_POST['id_agency'] != "") &&
+    (isset($_POST['title']) && $_POST['title'] != "") &&
+    (isset($_POST['brand']) && $_POST['brand'] != "") &&
+    (isset($_POST['model']) && $_POST['model'] != "") &&
+    (isset($_POST['daily_cost']) && $_POST['daily_cost'] != "") &&
+    (isset($_POST['description']) && $_POST['description'] != "")
+  ) {
+    $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le véhicule <strong>" . $_POST['title'] . '</strong> a bien été modifié !! La précédente photo est conservée.</div>';
+  } else $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
+  
 
   if (!$error) {
     // modification statement
     if (isset($_POST['modify'])) {
-      $result = $conn->prepare("UPDATE vehicles SET id_agency = :id_agency, title = :title, brand = :brand, model= :model, description = :description, photo = :photo, daily_cost = :daily_cost WHERE id_vehicle = :id_vehicle");
+      if (isset($_POST['photo']) && $_POST['photo'] != "") {
+        $result = $conn->prepare("UPDATE vehicles SET id_agency = :id_agency, title = :title, brand = :brand, model= :model, description = :description, photo = :photo, daily_cost = :daily_cost WHERE id_vehicle = :id_vehicle");
+      } else {
+        unset($_POST['photo']);
+        $result = $conn->prepare("UPDATE vehicles SET id_agency = :id_agency, title = :title, brand = :brand, model= :model, description = :description, daily_cost = :daily_cost WHERE id_vehicle = :id_vehicle");
+      }
+      
     } else {
       $result = $conn->prepare("INSERT INTO vehicles (id_agency, title, brand, model, description, photo, daily_cost) VALUES (:id_agency, :title, :brand, :model, :description, :photo, :daily_cost)");
     }

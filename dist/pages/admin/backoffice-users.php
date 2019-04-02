@@ -50,7 +50,7 @@ if ($_POST & !empty($_POST)){
     (isset($_POST['sex']) && $_POST['sex'] != "") &&
     (isset($_POST['status']) && $_POST['status'] != "")
     ) {
-      $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le membre : <strong>" . $_POST['user_name'] . '</strong> a bien été ajouté !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>Le membre <strong>" . $_POST['user_name'] . '</strong> a bien été ajouté !!</div>';
   } else if (isset($_POST['modify']) &&
     (isset($_POST['user_name']) && $_POST['user_name'] != "") &&
     (isset($_POST['family_name']) && $_POST['family_name'] != "") &&
@@ -59,7 +59,7 @@ if ($_POST & !empty($_POST)){
     (isset($_POST['sex']) && $_POST['sex'] != "") &&
     (isset($_POST['status']) && $_POST['status'] != "")
     ){
-      $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le membre : <strong>" . $_POST['user_name'] . '</strong> a bien été modifié !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>Le membre <strong>" . $_POST['user_name'] . '</strong> a bien été modifié !!</div>';
   } else {
       $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
   } 

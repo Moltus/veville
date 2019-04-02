@@ -50,10 +50,18 @@ if ($_POST & !empty($_POST)){
     (isset($_POST['photo']) && $_POST['photo'] != "")
     ) { 
     if (isset($_POST['modify'])) { 
-      $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>L'agence : <strong>" . $_POST['title'] . '</strong> a bien été modifiée !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>L'agence <strong>" . $_POST['title'] . '</strong> a bien été modifiée !!</div>';
     } else {
-      $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>L'agence : <strong>" . $_POST['title'] . '</strong> a bien été ajoutée !!</div>';
+      $info .= "<div class='col-md-6 mx-auto alert alert-success text-center'>L'agence <strong>" . $_POST['title'] . '</strong> a bien été ajoutée !!</div>';
     }
+  } else if (isset($_POST['modify']) &&
+    (isset($_POST['title']) && $_POST['title'] != "") &&
+    (isset($_POST['address']) && $_POST['address'] != "") &&
+    (isset($_POST['city']) && $_POST['city'] != "") &&
+    (isset($_POST['zip_code']) && $_POST['zip_code'] != "") &&
+    (isset($_POST['description']) && $_POST['description'] != "")
+  ) {
+    $info .= "<div class='col-md-6 mx-auto alert alert-warning text-center'>L'agence <strong>" . $_POST['title'] . '</strong> a bien été modifiée !! La précédente photo est conservée.</div>';
   } else {
     $error .= "<div class='col-md-6 mx-auto text-dark text-center alert alert-danger'>Merci de bien remplir tous les champs du formulaire</div>";
   }
@@ -61,7 +69,12 @@ if ($_POST & !empty($_POST)){
   if (!$error) {
     // modification statement
     if (isset($_POST['modify'])) {
-      $result = $conn->prepare("UPDATE agencies SET title = :title, address = :address, city = :city, zip_code = :zip_code, description = :description, photo = :photo WHERE id_agency = :id_agency");
+      if (isset($_POST['photo']) && $_POST['photo'] != "") {
+        $result = $conn->prepare("UPDATE agencies SET title = :title, address = :address, city = :city, zip_code = :zip_code, description = :description, photo = :photo WHERE id_agency = :id_agency");
+      } else {
+        unset($_POST['photo']);
+        $result = $conn->prepare("UPDATE agencies SET title = :title, address = :address, city = :city, zip_code = :zip_code, description = :description WHERE id_agency = :id_agency");
+      }
     } else {
       $result = $conn->prepare("INSERT INTO agencies (title, address, city, zip_code, description, photo) VALUES (:title, :address, :city, :zip_code, :description, :photo)");
     }
